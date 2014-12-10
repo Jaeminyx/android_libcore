@@ -38,7 +38,7 @@ import libcore.net.UriCodec;
  */
 public class FileURLConnection extends URLConnection {
 
-    private String filename;
+    String fileName;
 
     private InputStream is;
 
@@ -56,11 +56,11 @@ public class FileURLConnection extends URLConnection {
      */
     public FileURLConnection(URL url) {
         super(url);
-        filename = url.getFile();
-        if (filename == null) {
-            filename = "";
+        fileName = url.getFile();
+        if (fileName == null) {
+            fileName = "";
         }
-        filename = UriCodec.decode(filename);
+        fileName = UriCodec.decode(fileName);
     }
 
     /**
@@ -73,7 +73,7 @@ public class FileURLConnection extends URLConnection {
      */
     @Override
     public void connect() throws IOException {
-        File f = new File(filename);
+        File f = new File(fileName);
         if (f.isDirectory()) {
             isDir = true;
             is = getDirectoryListing(f);
@@ -196,7 +196,7 @@ public class FileURLConnection extends URLConnection {
     @Override
     public java.security.Permission getPermission() throws IOException {
         if (permission == null) {
-            String path = filename;
+            String path = fileName;
             if (File.separatorChar != '/') {
                 path = path.replace('/', File.separatorChar);
             }

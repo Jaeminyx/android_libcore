@@ -123,8 +123,8 @@ public abstract class URLConnection {
     protected boolean doInput = true;
 
     /**
-     * Unused by Android. This field can be accessed via {@link #getAllowUserInteraction}
-     * and {@link #setAllowUserInteraction}.
+     * Specifies whether this {@code URLConnection} allows user interaction as
+     * it is needed for authentication purposes.
      */
     protected boolean allowUserInteraction = defaultAllowUserInteraction;
 
@@ -167,7 +167,11 @@ public abstract class URLConnection {
     public abstract void connect() throws IOException;
 
     /**
-     * Returns {@code allowUserInteraction}. Unused by Android.
+     * Returns the option value which indicates whether user interaction is allowed
+     * on this {@code URLConnection}.
+     *
+     * @return the value of the option {@code allowUserInteraction}.
+     * @see #allowUserInteraction
      */
     public boolean getAllowUserInteraction() {
         return allowUserInteraction;
@@ -338,7 +342,11 @@ public abstract class URLConnection {
     }
 
     /**
-     * Returns the default value of {@code allowUserInteraction}. Unused by Android.
+     * Returns the default setting whether this connection allows user interaction.
+     *
+     * @return the value of the default setting {@code
+     *         defaultAllowUserInteraction}.
+     * @see #allowUserInteraction
      */
     public static boolean getDefaultAllowUserInteraction() {
         return defaultAllowUserInteraction;
@@ -796,7 +804,16 @@ public abstract class URLConnection {
     }
 
     /**
-     * Sets {@code allowUserInteraction}. Unused by Android.
+     * Sets the flag indicating whether this connection allows user interaction
+     * or not. This method can only be called prior to the connection
+     * establishment.
+     *
+     * @param newValue
+     *            the value of the flag to be set.
+     * @throws IllegalStateException
+     *             if this method attempts to change the flag after the
+     *             connection has been established.
+     * @see #allowUserInteraction
      */
     public void setAllowUserInteraction(boolean newValue) {
         checkNotConnected();
@@ -820,7 +837,14 @@ public abstract class URLConnection {
     }
 
     /**
-     * Sets the default value for {@code allowUserInteraction}. Unused by Android.
+     * Sets the default value for the flag indicating whether this connection
+     * allows user interaction or not. Existing {@code URLConnection}s are
+     * unaffected.
+     *
+     * @param allows
+     *            the default value of the flag to be used for new connections.
+     * @see #defaultAllowUserInteraction
+     * @see #allowUserInteraction
      */
     public static void setDefaultAllowUserInteraction(boolean allows) {
         defaultAllowUserInteraction = allows;
